@@ -31,6 +31,12 @@ class User():
 		del self._playlists[playlist]
 		return self.get_playlists_list()
 
+	def get_likes(self):
+		return self._likes
+
+	def get_dislikes(self):
+		return self._dislikes
+
 	def add_like_song(self,song_index):
 		if song_index not in self._likes:
 			self._likes.append(song_index)
