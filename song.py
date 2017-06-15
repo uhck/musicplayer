@@ -39,7 +39,7 @@ class Song():
 
 	def display_song_info(self):
 		print '\n','-'*27,'SONG','-'*27
-		print self.get_title()
-		print self.get_artist()
-		print self.get_album(),'\n'
+		print 'Song:'.ljust(10), self.get_title()
+		print 'Artist:'.ljust(10), self.get_artist()
+		print 'Album:'.ljust(10), self.get_album(),'\n'
 
