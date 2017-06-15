@@ -36,3 +36,10 @@ class Song():
 
 	def get_album(self):
 		return self._album
+
+	def display_song_info(self):
+		print '\n','-'*27,'SONG','-'*27
+		print self.get_title()
+		print self.get_artist()
+		print self.get_album(),'\n'
+
