@@ -13,9 +13,9 @@ class MusicPlayer():
 		[self._library.append(Song(line.split()[0])) for line in lines]
 		self._user = User(raw_input('Username: '))
 		self._currently_playing = None
-		self._active_playlist = random.sample(range(len(self._library)),len(self._library))
+		self._active_playlist = range(0,len(self._library))
 		self._active_playlist_name = 'LIBRARY'
-		#self.run_state_machine()
+		self.run_state_machine()
 
 	#----------------------------- Runs the music player's state machine - uses main menu as home
 	def run_state_machine(self):
@@ -43,8 +43,8 @@ class MusicPlayer():
 	def open_playlists(self):
 		os.system('clear')
 		menu = [MusicPlayer.add_playlist, MusicPlayer.delete_playlist, MusicPlayer.open_playlist, \
-				MusicPlayer.listen_to_playlist, MusicPlayer.exit]
-		print_menu_index = [4,5,20,6,9]
+				MusicPlayer.exit]
+		print_menu_index = [4,5,20,9]
 		go_back = False
 		while not go_back:
 			playlists = self._user.get_playlists_list()
@@ -72,8 +72,6 @@ class MusicPlayer():
 				return False
 		self._active_playlist = self._user.get_playlist(ans)
 		self._active_playlist_name = ans
-		print self._active_playlist_name
-		print self._active_playlist
 		go_back = False
 		while not go_back:
 			self.display_songlist(self._active_playlist_name,self._active_playlist)
@@ -84,7 +82,6 @@ class MusicPlayer():
 
 	#---------------------------------- Prints active song information and responds to user input
 	def open_song(self):
-		os.system('clear')
 		menu = [MusicPlayer.play_song, MusicPlayer.skip_song, MusicPlayer.stop_song, \
 				MusicPlayer.like_song, MusicPlayer.dislike_song, \
 				MusicPlayer.add_song_to_playlist, MusicPlayer.remove_song_from_playlist, \
@@ -100,7 +97,8 @@ class MusicPlayer():
 			self._currently_playing = self.get_answer('Enter Song Selection:',1,len(self._active_playlist))
 		go_back = False
 		while not go_back:
-			self._currently_playing = self._active_playlist[self._currently_playing]
+			os.system('clear')
+			print 'Currently playing index:', self._currently_playing
 			self._library[self._currently_playing].display_song_info()
 			self.display_menu('SONG MENU', print_menu_index)
 			ans = self.get_answer('Enter Menu Selection:',1,len(menu))
@@ -196,6 +194,16 @@ class MusicPlayer():
 	#----------------------------------------------------- Shuffles playlist songs and plays them
 	def listen_to_playlist(self):
 		os.system('clear')
+		if len(self._active_playlist) == 0:
+			print "No songs in playlist."
+			return False
+		for song_index in self._active_playlist:
+			self._currently_playing = song_index
+			self.play_song()
+			self.open_song()
+			if self._currently_playing == None:
+				break
+		return False
 
 	#---------------------------------------------------- Adds a new playlist to user's playlists
 	def add_playlist(self):
@@ -314,11 +322,9 @@ class MusicPlayer():
 				  self._library[songs[i]].get_album().ljust(25)
 		print ''
 
-	#---------------------------------- Resets active class variables and stops music before exit
+	#---------------------------------------------------------------------- Returns true to  exit
 	def exit(self):
-		if self._currently_playing != None:
-			self.stop_song()
-		self._currently_playing = None
-		self._active_playlist = random.sample(range(len(self._library)),len(self._library))
-		self._active_playlist_name = 'LIBRARY'
 		return True
+
+#-------------------------------------------------------------------------------------- MAIN MENU
+MusicPlayer('songs.txt')
