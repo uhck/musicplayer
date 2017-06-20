@@ -277,13 +277,13 @@ class MusicPlayer():
 		if self._active_playlist_name == '' or self._active_playlist_name == 'LIBRARY':
 			while self._active_playlist_name not in self._user.get_playlists_list():
 				self._active_playlist_name = raw_input('Enter Playlist Selection (Cancel to \
-														cancel): ')
+								cancel): ')
 		self._active_playlist = self._user.get_playlist(self._active_playlist_name)
 		self.display_songlist(self._active_playlist_name,self._active_playlist)
 		#------------------------------------------------------ Gets user input if no active song
 		if self._active_song == None or self._active_song not in self._active_playlist:
 			self._active_song = self.get_answer('Enter Song Selection (Cancel to cancel):', \
-													   1,len(self._library))
+								1,len(self._library))
 		self._active_playlist = self._user.remove_song_from_playlist(self._active_playlist_name, \
 								self._active_playlist[self._active_song])
 		self._active_song = None
