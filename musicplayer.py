@@ -267,7 +267,7 @@ class MusicPlayer():
 				return False
 		#------------------------------------------------------------------------------ Adds song
 		self._active_playlist = self._user.add_song_to_playlist(self._active_playlist_name, \
-																self._active_song)
+								self._active_song)
 		self._active_song = None
 		return False
 
@@ -285,7 +285,7 @@ class MusicPlayer():
 			self._active_song = self.get_answer('Enter Song Selection (Cancel to cancel):', \
 													   1,len(self._library))
 		self._active_playlist = self._user.remove_song_from_playlist(self._active_playlist_name, \
-													self._active_playlist[self._active_song])
+								self._active_playlist[self._active_song])
 		self._active_song = None
 		return False
 
