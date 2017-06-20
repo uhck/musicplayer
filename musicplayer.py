@@ -335,8 +335,7 @@ class MusicPlayer():
 					 'Go Back', 'Open Song', 'Play Song', 'Skip Song', \
 					 'Like Song', 'Dislike Song', 'Listen To Library','By Song Title', \
 					 'By Artist','By Album', 'Stop Song', 'Open Playlist']
-		print ''
-		print '-'*27,title,'-'*27
+		print '\n','-'*27,title,'-'*27
 		for i in range(0,len(opts)):
 			print str(i+1)+')', opts_list[opts[i]]
 		print ''
